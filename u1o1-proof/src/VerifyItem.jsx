@@ -7,6 +7,11 @@ function VerifyItem() {
   const [item, setItem] = useState(null)
   const [ownership, setOwnership] = useState([])
   const [loading, setLoading] = useState(true)
+  const [transferForm, setTransferForm] = useState({
+    owner_name: '',
+    owner_email: ''
+  })
+  const [transferred, setTransferred] = useState(false)
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -34,6 +39,22 @@ function VerifyItem() {
     fetchItem()
   }, [hash])
 
+  const handleTransfer = async () => {
+    await supabase.from('ownership_log').insert([{
+      item_id: item.id,
+      owner_name: transferForm.owner_name,
+      owner_email: transferForm.owner_email,
+      note: 'transferred'
+    }])
+
+    await supabase
+      .from('items')
+      .update({ status: 'transferred' })
+      .eq('id', item.id)
+
+    setTransferred(true)
+  }
+
   if (loading) return <div>Loading...</div>
   if (!item) return <div>Item not found.</div>
 
@@ -56,6 +77,23 @@ function VerifyItem() {
             {record.note && <p>{record.note}</p>}
           </div>
         ))
+      )}
+
+      <h2>Transfer Ownership</h2>
+      {!transferred ? (
+        <div>
+          <input
+            placeholder="New owner name"
+            onChange={(e) => setTransferForm({...transferForm, owner_name: e.target.value})}
+          /><br/>
+          <input
+            placeholder="New owner email"
+            onChange={(e) => setTransferForm({...transferForm, owner_email: e.target.value})}
+          /><br/>
+          <button onClick={handleTransfer}>Transfer</button>
+        </div>
+      ) : (
+        <p>Ownership transferred successfully.</p>
       )}
     </div>
   )
