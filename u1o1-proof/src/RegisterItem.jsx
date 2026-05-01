@@ -51,7 +51,7 @@ if (submitted) return (
   <div>
     <h2>Item Registered</h2>
     <p>Scan to verify this piece:</p>
-    <QRCodeSVG value={`http://localhost:5173/verify/${createdHash}`} />
+    <QRCodeSVG value={`https://u101-proof.vercel.app/verify/${createdHash}`} />
     <p>{createdHash}</p>
   </div>
 )
