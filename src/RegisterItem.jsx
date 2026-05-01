@@ -81,15 +81,17 @@ function App() {
     color: '#102a43'
   }
 
-  const inputStyles = {
+    const inputStyles = {
     width: '100%',
     padding: '14px 16px',
     borderRadius: '14px',
     border: '1px solid #cbd5e1',
     marginBottom: '14px',
     fontSize: '1rem',
-    color: '#102a43'
+    color: '#102a43',
+    background: '#ffffff'
   }
+
 
   const hintStyles = {
     margin: '0 0 18px 0',

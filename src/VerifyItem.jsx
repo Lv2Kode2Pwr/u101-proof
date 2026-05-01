@@ -99,15 +99,17 @@ function VerifyItem() {
     fontWeight: '600'
   }
 
-  const inputStyles = {
+    const inputStyles = {
     width: '100%',
     padding: '14px 16px',
     borderRadius: '14px',
     border: '1px solid #cbd5e1',
     marginBottom: '16px',
     fontSize: '1rem',
-    color: '#102a43'
+    color: '#102a43',
+    background: '#ffffff'
   }
+
 
   const hintStyles = {
     marginTop: '-12px',
